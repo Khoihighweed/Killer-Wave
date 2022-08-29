@@ -7,8 +7,7 @@ public class PlayerBullet : MonoBehaviour, IActorTemplate
     int health;
     int travelSpeed;
 
-    [SerializeField]
-    SOActorModel bulletModel;
+    [SerializeField] SOActorModel bulletModel;
 
     void Awake()
     {
@@ -37,29 +36,31 @@ public class PlayerBullet : MonoBehaviour, IActorTemplate
         travelSpeed = actorModel.speed;
         actor = actorModel.actor;
     }
+
     void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Enemy")
+        if (other.tag == "Enemy")
         {
-            if(other.GetComponent<IActorTemplate>() != null)
+            if (other.GetComponent<IActorTemplate>() !=
+            null)
             {
-                if(health >= 1)
+                if (health >= 1)
                 {
-                    health -= other.GetComponent<IActorTemplate>().SendDamage();
+                    health -= other.
+                    GetComponent<IActorTemplate>
+                    ().SendDamage();
                 }
-                if(health <= 0)
+                if (health <= 0)
                 {
                     Die();
                 }
             }
         }
     }
-    
     void Update()
     {
         transform.position += new Vector3(travelSpeed, 0, 0) * Time.deltaTime;
     }
-
     void OnBecameInvisible()
     {
         Destroy(gameObject);

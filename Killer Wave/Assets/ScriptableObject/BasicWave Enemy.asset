@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93067ce4a8d95c04eb37306946726a94, type: 3}
+  m_Script: {fileID: 11500000, guid: 783791bc698c1064d8ecee22848ddfd6, type: 3}
   m_Name: BasicWave Enemy
   m_EditorClassIdentifier: 
   actorName: enemy_wave
@@ -18,5 +18,5 @@ MonoBehaviour:
   health: 1
   speed: -50
   hitPower: 1
-  actor: {fileID: 8896426530662938361, guid: 63484a852be683b49afc05b0216103be, type: 3}
+  actor: {fileID: 4681508020013543153, guid: ffccd6f602c45ad42a66f40bb437aaaa, type: 3}
   actorBullets: {fileID: 0}

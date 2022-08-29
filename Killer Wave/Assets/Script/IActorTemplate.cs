@@ -4,4 +4,5 @@ public interface IActorTemplate
     void TakeDamage(int incomingDamage);
     void Die();
     void ActorStats(SOActorModel actorModel);
+
 }

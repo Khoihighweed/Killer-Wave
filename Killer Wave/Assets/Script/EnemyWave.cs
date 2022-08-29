@@ -6,8 +6,7 @@ public class EnemyWave : MonoBehaviour, IActorTemplate
     int travelSpeed;
     int fireSpeed;
     int hitPower;
-
-    //wave enemy]
+    //wave enemy
     [SerializeField]
     float verticalSpeed = 2;
     [SerializeField]
@@ -30,16 +29,18 @@ public class EnemyWave : MonoBehaviour, IActorTemplate
     {
         Destroy(this.gameObject);
     }
+
     void OnTriggerEnter(Collider other)
     {
         // if the player or their bullet hits you.
         if (other.tag == "Player")
         {
-            if(health >= 1)
+            if (health >= 1)
             {
-                health -= other.GetComponent<IActorTemplate>().SendDamage();
+                health -= other.GetComponent<IActorTemplate>
+                ().SendDamage();
             }
-            if(health <= 0)
+            if (health <= 0)
             {
                 Die();
             }
@@ -54,10 +55,16 @@ public class EnemyWave : MonoBehaviour, IActorTemplate
     {
         return hitPower;
     }
+
     public void Attack()
     {
         time += Time.deltaTime;
-        sineVer.y = Mathf.Sin(time * verticalSpeed) * verticalAmplitude;
-        transform.position = new Vector3(transform.position.x + travelSpeed * Time.deltaTime, transform.position.y + sineVer.y, transform.position.z);
+        sineVer.y = Mathf.Sin(time * verticalSpeed) *
+        verticalAmplitude;
+        transform.position = new Vector3(transform.
+        position.x
+        + travelSpeed * Time.deltaTime,
+        transform.position.y + sineVer.y,
+        transform.position.z);
     }
 }

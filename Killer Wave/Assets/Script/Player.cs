@@ -1,11 +1,12 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour, IActorTemplate
+public class Player : MonoBehaviour
 {
     int travelSpeed;
     int health;
     int hitPower;
-
     GameObject actor;
     GameObject fire;
 
@@ -21,7 +22,7 @@ public class Player : MonoBehaviour, IActorTemplate
         set { fire = value; }
     }
 
-    GameObject _player;
+    GameObject _Player;
     float width;
     float height;
 
@@ -29,14 +30,15 @@ public class Player : MonoBehaviour, IActorTemplate
     {
         height = 1 / (Camera.main.WorldToViewportPoint(new Vector3(1, 1, 0)).y - .5f);
         width = 1 / (Camera.main.WorldToViewportPoint(new Vector3(1, 1, 0)).x - .5f);
-
-        _player = GameObject.Find("_Player");
+        _Player = GameObject.Find("_Player");
     }
+
     private void Update()
     {
         Movement();
         Attack();
     }
+
     public void ActorStats(SOActorModel actorModel)
     {
         health = actorModel.health;
@@ -47,22 +49,23 @@ public class Player : MonoBehaviour, IActorTemplate
 
     void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Enemy")
+        if (other.tag == "Enemy")
         {
-            if(health >= 1)
+            if (health >= 1)
             {
-                if(transform.Find("energy +1(clone)"))
+                if (transform.Find("energy +1(Clone)"))
                 {
-                    Destroy(transform.Find("energy +1(clone)").gameObject);
-                    health -= other.GetComponent<IActorTemplate>().SendDamage();
+                    Destroy(transform.Find("energy +1(Clone)").
+                    gameObject);
+                    health -= other.GetComponent<IActorTemplate>
+                    ().SendDamage();
                 }
                 else
                 {
                     health -= 1;
                 }
             }
-
-            if(health <= 0)
+            if (health <= 0)
             {
                 Die();
             }
@@ -73,7 +76,6 @@ public class Player : MonoBehaviour, IActorTemplate
     {
         health -= incomingDamage;
     }
-
     public int SendDamage()
     {
         return hitPower;
@@ -83,50 +85,58 @@ public class Player : MonoBehaviour, IActorTemplate
     {
         if (Input.GetAxisRaw("Horizontal") > 0)
         {
-            if(transform.localPosition.x < width + width/0.9f)
+            if (transform.localPosition.x < width +
+            width / 0.9f)
             {
-                transform.localPosition += new Vector3(Input.GetAxisRaw("Horizontal") * Time.deltaTime * travelSpeed, 0, 0);
+                transform.localPosition += new Vector3
+                (Input.GetAxisRaw("Horizontal")
+                * Time.deltaTime * travelSpeed, 0, 0);
             }
         }
-        //move player to the left
-        if(Input.GetAxisRaw("Horizontal") < 0)
+        if (Input.GetAxisRaw("Horizontal") < 0)
         {
-            if(transform.localPosition.x > width + width/6)
+            if (transform.localPosition.x > width +
+            width / 6)
             {
-                transform.localPosition += new Vector3(Input.GetAxisRaw("Horizontal") * Time.deltaTime * travelSpeed, 0, 0);
+                transform.localPosition += new Vector3
+                (Input.GetAxisRaw("Horizontal")
+                * Time.deltaTime * travelSpeed, 0, 0);
             }
         }
-        //move the ship down
-        if(Input.GetAxisRaw("Vertical") < 0)
+        if (Input.GetAxisRaw("Vertical") < 0)
         {
-            if(transform.localPosition.y > -height/3f)
+            if (transform.localPosition.y > -height / 3f)
             {
-                transform.localPosition += new Vector3(0, Input.GetAxisRaw("Vertical") * Time.deltaTime * travelSpeed, 0);
+                transform.localPosition += new Vector3
+                (0, Input.GetAxisRaw("Vertical") * Time.
+                deltaTime * travelSpeed, 0);
             }
         }
-        //move the ship up
-        if(Input.GetAxisRaw("Vertical") > 0)
+        if (Input.GetAxisRaw("Vertical") > 0)
         {
-            if(transform.localPosition.y < height/2.5f)
+            if (transform.localPosition.y < height / 2.5f)
             {
-                transform.localPosition += new Vector3(0,Input.GetAxisRaw("Vertical")*Time.deltaTime*travelSpeed,0);
+                transform.localPosition += new Vector3
+                (0, Input.GetAxisRaw("Vertical") * Time.
+                deltaTime * travelSpeed, 0);
             }
         }
     }
-
-    //the die method
     public void Die()
     {
         Destroy(this.gameObject);
     }
-
     public void Attack()
     {
-        if(Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1"))
         {
-            GameObject bullet = GameObject.Instantiate(fire,transform.position,Quaternion.Euler(new Vector3(0,0,0))) as GameObject;
-            bullet.transform.SetParent(_player.transform);
+            GameObject bullet = GameObject.Instantiate
+            (fire, transform.position, Quaternion.Euler
+            (new Vector3(0, 0, 0))) as GameObject;
+            bullet.transform.SetParent(_Player.transform);
             bullet.transform.localScale = new Vector3(7, 7, 7);
         }
     }
 }
+
+
