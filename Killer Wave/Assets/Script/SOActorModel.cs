@@ -1,4 +1,5 @@
 using UnityEngine;
+
 [CreateAssetMenu(fileName = "Create Actor", menuName = "Create Actor")]
 public class SOActorModel : ScriptableObject
 {
